@@ -28,7 +28,9 @@ class Autentikasi extends BaseController
             "nip"     => $Guru["nip"],
             "inisial" => $Guru["inisial"],
             "nama"    => $Guru["nama"],
+            "jabatan" => $Guru["jabatan"],
             "jenis"   => $Guru["jenis"],
+            "foto"    => "foto-profil/" . $Guru["foto"],
             "sesi"    => true
         ];
 

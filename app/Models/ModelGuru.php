@@ -12,7 +12,7 @@ class ModelGuru extends Model
 
     public function Masuk($username, $password)
     {
-        $this->select("nip, inisial, nama, jenis");
+        $this->select("nip, inisial, nama, jabatan, jenis, foto");
         $this->where("username", $username);
         $this->where("password", md5($password));
         return $this->first();
