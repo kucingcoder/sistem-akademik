@@ -8,11 +8,11 @@ class ModelGuru extends Model
 {
     protected $table = "guru";
     protected $primaryKey = "nip";
-    protected $allowedFields = ["nip", "nik", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status"];
+    protected $allowedFields = ["nip", "nik", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status", "jenis"];
 
     public function Masuk($username, $password)
     {
-        $this->select("nip, nama");
+        $this->select("nip, inisial, nama, jenis");
         $this->where("username", $username);
         $this->where("password", md5($password));
         return $this->first();
