@@ -9,7 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Autentikasi extends BaseController
 {
-    public function Masuk(Request $request)
+    public function Masuk()
     {
         $Session = session();
 
