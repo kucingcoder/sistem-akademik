@@ -16,7 +16,7 @@ class Autentikasi extends BaseController
         $Username = $this->request->getVar("username");
         $Password = md5($this->request->getVar("password"));
 
-        $ModelGuru = new ModelGuru;
+        $ModelGuru = new ModelGuru();
         $Guru = $ModelGuru->where(["username" => $Username, "password" => $Password])->first();
 
         if (!$Guru) {
