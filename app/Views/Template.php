@@ -121,14 +121,14 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="<?= $this->renderSection('Foto') ?>" alt="Foto" class="rounded-circle" style="width: 35px; height: 35px; object-fit: fill; object-position: center;">
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?= $this->renderSection('Nama1') ?></span>
+                        <img src="<?= base_url(session()->get("foto")) ?>" alt="Foto" class="rounded-circle" style="width: 35px; height: 35px; object-fit: fill; object-position: center;">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><?= session()->get("nama") ?></span>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?= $this->renderSection('Nama2') ?></h6>
-                            <span><?= $this->renderSection('Jenis') ?></span>
+                            <h6><?= session()->get("nama") ?></h6>
+                            <span><?= session()->get("jabatan") . " (" . session()->get("jenis") . ")" ?></span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -224,7 +224,7 @@
             </li>
 
             <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="Rekapitulasi.html">
+                <a class="nav-link collapsed" href="/rekapitulasi">
                     <i class="bi bi-list-stars"></i>
                     <span>Rekapitulasi</span>
                 </a>

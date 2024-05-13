@@ -87,10 +87,6 @@ class Dashboard extends BaseController
         );
 
         $data = array(
-            "Nama"          => session()->get("nama"),
-            "Jabatan"       => session()->get("jabatan") . " ",
-            "Jenis"         => session()->get("jenis"),
-            "Foto"          => session()->get("foto"),
             "JadwalHariIni" => $JadwalHariIni,
             "Kaldik"        => $DataKaldik,
             "Siswa"         => $DataSiswa,

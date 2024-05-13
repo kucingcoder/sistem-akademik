@@ -1,10 +1,6 @@
 <?= $this->extend('Template') ?>
 
 <?= $this->section('Judul') ?>SMK Bahari Tegal - Dashboard<?= $this->endSection() ?>
-<?= $this->section('Foto') ?><?= base_url($Foto) ?><?= $this->endSection() ?>
-<?= $this->section('Nama1') ?><?= $Nama ?><?= $this->endSection() ?>
-<?= $this->section('Nama2') ?><?= $Nama ?><?= $this->endSection() ?>
-<?= $this->section('Jenis') ?><?= $Jabatan . "(" . $Jenis . ")" ?><?= $this->endSection() ?>
 
 <?= $this->section('Konten') ?>
 <div class="pagetitle">
@@ -52,8 +48,8 @@
                                     </a>
                                 </div>
                                 <div class="ps-3">
-                                    <h6 id="SiswaJml"><?php echo $Siswa['I'][0]->jml; ?></h6>
-                                    <span class="text-success small pt-1 fw-bold" id="SiswaPersen"><?php echo substr($Siswa['I'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?php echo $Siswa['Semua'][0]->jml; ?></span>
+                                    <h6 id="SiswaJml"><?= $Siswa['I'][0]->jml; ?></h6>
+                                    <span class="text-success small pt-1 fw-bold" id="SiswaPersen"><?= substr($Siswa['I'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?= $Siswa['Semua'][0]->jml; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +79,8 @@
                                     </a>
                                 </div>
                                 <div class="ps-3">
-                                    <h6 id="GuruJml"><?php echo $Guru['Normatif'][0]->jml; ?></h6>
-                                    <span class="text-success small pt-1 fw-bold" id="GuruPersen"><?php echo substr($Guru['Normatif'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?php echo $Guru['Semua'][0]->jml; ?></span>
+                                    <h6 id="GuruJml"><?= $Guru['Normatif'][0]->jml; ?></h6>
+                                    <span class="text-success small pt-1 fw-bold" id="GuruPersen"><?= substr($Guru['Normatif'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?= $Guru['Semua'][0]->jml; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -114,8 +110,8 @@
                                     </a>
                                 </div>
                                 <div class="ps-3">
-                                    <h6 id="KelasJml"><?php echo $Kelas['I'][0]->jml; ?></h6>
-                                    <span class="text-success small pt-1 fw-bold" id="KelasPersen"><?php echo substr($Kelas['I'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?php echo $Kelas['Semua'][0]->jml; ?></span>
+                                    <h6 id="KelasJml"><?= $Kelas['I'][0]->jml; ?></h6>
+                                    <span class="text-success small pt-1 fw-bold" id="KelasPersen"><?= substr($Kelas['I'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?= $Kelas['Semua'][0]->jml; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +141,8 @@
                                     </a>
                                 </div>
                                 <div class="ps-3">
-                                    <h6 id="MapelJml"><?php echo $MataPelajaran['Normatif'][0]->jml; ?></h6>
-                                    <span class="text-success small pt-1 fw-bold" id="MapelPersen"><?php echo substr($MataPelajaran['Normatif'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?php echo $MataPelajaran['Semua'][0]->jml; ?></span>
+                                    <h6 id="MapelJml"><?= $MataPelajaran['Normatif'][0]->jml; ?></h6>
+                                    <span class="text-success small pt-1 fw-bold" id="MapelPersen"><?= substr($MataPelajaran['Normatif'][0]->persen, 0, 5) . "%"; ?></span> <span class="text-muted small pt-2 ps-1">dari total <?= $MataPelajaran['Semua'][0]->jml; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -159,15 +155,15 @@
             <div class="card">
                 <div class="card-body">
                     <?php if (!empty($JadwalHariIni)) : ?>
-                        <h5 class="card-title">KBM Hari Ini <span>| <?php echo count($JadwalHariIni); ?> Kelas</span></h5>
+                        <h5 class="card-title">KBM Hari Ini <span>| <?= count($JadwalHariIni); ?> Kelas</span></h5>
 
                         <div class="activity">
                             <?php foreach ($JadwalHariIni as $jadwal) : ?>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label"><?php echo substr($jadwal->mulai, 0, 5); ?></div>
+                                    <div class="activite-label"><?= substr($jadwal->mulai, 0, 5); ?></div>
                                     <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                                     <div class="activity-content">
-                                        <a href="<?php echo "/pelaksanaan-kbm/" . strtolower(str_replace(" ", "-", substr(strstr($jadwal->teks, "Kelas"), strlen("Kelas ")))) . "/" . strtolower(str_replace("/", "=", str_replace(" ", "-", strstr($jadwal->teks, " di Kelas", true)))) . "/" . substr($jadwal->mulai, 0, 5); ?>" class="fw-bold text-dark"><?php echo str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
+                                        <a href="<?= "/pelaksanaan-kbm/" . strtolower(str_replace(" ", "-", substr(strstr($jadwal->teks, "Kelas"), strlen("Kelas ")))) . "/" . strtolower(str_replace("/", "=", str_replace(" ", "-", strstr($jadwal->teks, " di Kelas", true)))) . "/" . substr($jadwal->mulai, 0, 5); ?>" class="fw-bold text-dark"><?= str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -192,7 +188,7 @@
                 </div>
 
                 <div class="card-body">
-                    <h5 class="card-title">Kalender Akademik <span id="Semester">| <?php echo $Kaldik["Semester"]; ?></span></h5>
+                    <h5 class="card-title">Kalender Akademik <span id="Semester">| <?= $Kaldik["Semester"]; ?></span></h5>
 
                     <?php
                     if ($Kaldik["Semester"] == "Ganjil") {
@@ -205,9 +201,9 @@
                     <div class="activity" id="DaftarKegiatan">
                         <?php foreach ($DaftarKegiatan as $ItemKegiatan) : ?>
                             <div class="activity-item d-flex" style="height: 95px;">
-                                <div class="activite-label text-center"><?php echo implode("<br>-<br>", explode("-", $ItemKegiatan->waktu)); ?></div>
+                                <div class="activite-label text-center"><?= implode("<br>-<br>", explode("-", $ItemKegiatan->waktu)); ?></div>
                                 <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                <div class="activity-content"><?php echo $ItemKegiatan->kegiatan; ?></div>
+                                <div class="activity-content"><?= $ItemKegiatan->kegiatan; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -237,7 +233,7 @@
             endforeach;
             ?>
 
-            document.getElementById("DaftarKegiatan").innerHTML = `<?php echo $Kegiatan; ?>`
+            document.getElementById("DaftarKegiatan").innerHTML = `<?= $Kegiatan; ?>`
         } else {
             document.getElementById("Semester").innerHTML = "Genap";
             <?php
@@ -254,7 +250,7 @@
             endforeach;
             ?>
 
-            document.getElementById("DaftarKegiatan").innerHTML = `<?php echo $Kegiatan; ?>`
+            document.getElementById("DaftarKegiatan").innerHTML = `<?= $Kegiatan; ?>`
         }
     }
 
@@ -266,17 +262,17 @@
         }
 
         if (tingkat == 'I') {
-            document.getElementById("SiswaJml").innerHTML = <?php echo $Siswa['I'][0]->jml; ?>;
-            document.getElementById("SiswaPersen").innerHTML = <?php echo substr($Siswa['I'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("SiswaJml").innerHTML = <?= $Siswa['I'][0]->jml; ?>;
+            document.getElementById("SiswaPersen").innerHTML = <?= substr($Siswa['I'][0]->persen, 0, 5); ?> + "%";
         } else if (tingkat == 'II') {
-            document.getElementById("SiswaJml").innerHTML = <?php echo $Siswa['II'][0]->jml; ?>;
-            document.getElementById("SiswaPersen").innerHTML = <?php echo substr($Siswa['II'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("SiswaJml").innerHTML = <?= $Siswa['II'][0]->jml; ?>;
+            document.getElementById("SiswaPersen").innerHTML = <?= substr($Siswa['II'][0]->persen, 0, 5); ?> + "%";
         } else if (tingkat == 'III') {
-            document.getElementById("SiswaJml").innerHTML = <?php echo $Siswa['III'][0]->jml; ?>;
-            document.getElementById("SiswaPersen").innerHTML = <?php echo substr($Siswa['III'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("SiswaJml").innerHTML = <?= $Siswa['III'][0]->jml; ?>;
+            document.getElementById("SiswaPersen").innerHTML = <?= substr($Siswa['III'][0]->persen, 0, 5); ?> + "%";
         } else {
-            document.getElementById("SiswaJml").innerHTML = <?php echo $Siswa['Semua'][0]->jml; ?>;
-            document.getElementById("SiswaPersen").innerHTML = <?php echo substr($Siswa['Semua'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("SiswaJml").innerHTML = <?= $Siswa['Semua'][0]->jml; ?>;
+            document.getElementById("SiswaPersen").innerHTML = <?= substr($Siswa['Semua'][0]->persen, 0, 5); ?> + "%";
         }
     }
 
@@ -288,17 +284,17 @@
         }
 
         if (jenis == 'Produktif') {
-            document.getElementById("GuruJml").innerHTML = <?php echo $Guru['Produktif'][0]->jml; ?>;
-            document.getElementById("GuruPersen").innerHTML = <?php echo substr($Guru['Produktif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("GuruJml").innerHTML = <?= $Guru['Produktif'][0]->jml; ?>;
+            document.getElementById("GuruPersen").innerHTML = <?= substr($Guru['Produktif'][0]->persen, 0, 5); ?> + "%";
         } else if (jenis == 'Adaptif') {
-            document.getElementById("GuruJml").innerHTML = <?php echo $Guru['Adaptif'][0]->jml; ?>;
-            document.getElementById("GuruPersen").innerHTML = <?php echo substr($Guru['Adaptif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("GuruJml").innerHTML = <?= $Guru['Adaptif'][0]->jml; ?>;
+            document.getElementById("GuruPersen").innerHTML = <?= substr($Guru['Adaptif'][0]->persen, 0, 5); ?> + "%";
         } else if (jenis == 'Normatif') {
-            document.getElementById("GuruJml").innerHTML = <?php echo $Guru['Normatif'][0]->jml; ?>;
-            document.getElementById("GuruPersen").innerHTML = <?php echo substr($Guru['Normatif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("GuruJml").innerHTML = <?= $Guru['Normatif'][0]->jml; ?>;
+            document.getElementById("GuruPersen").innerHTML = <?= substr($Guru['Normatif'][0]->persen, 0, 5); ?> + "%";
         } else {
-            document.getElementById("GuruJml").innerHTML = <?php echo $Guru['Semua'][0]->jml; ?>;
-            document.getElementById("GuruPersen").innerHTML = <?php echo substr($Guru['Semua'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("GuruJml").innerHTML = <?= $Guru['Semua'][0]->jml; ?>;
+            document.getElementById("GuruPersen").innerHTML = <?= substr($Guru['Semua'][0]->persen, 0, 5); ?> + "%";
         }
     }
 
@@ -310,17 +306,17 @@
         }
 
         if (tingkat == 'I') {
-            document.getElementById("KelasJml").innerHTML = <?php echo $Kelas['I'][0]->jml; ?>;
-            document.getElementById("KelasPersen").innerHTML = <?php echo substr($Kelas['I'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("KelasJml").innerHTML = <?= $Kelas['I'][0]->jml; ?>;
+            document.getElementById("KelasPersen").innerHTML = <?= substr($Kelas['I'][0]->persen, 0, 5); ?> + "%";
         } else if (tingkat == 'II') {
-            document.getElementById("KelasJml").innerHTML = <?php echo $Kelas['II'][0]->jml; ?>;
-            document.getElementById("KelasPersen").innerHTML = <?php echo substr($Kelas['II'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("KelasJml").innerHTML = <?= $Kelas['II'][0]->jml; ?>;
+            document.getElementById("KelasPersen").innerHTML = <?= substr($Kelas['II'][0]->persen, 0, 5); ?> + "%";
         } else if (tingkat == 'III') {
-            document.getElementById("KelasJml").innerHTML = <?php echo $Kelas['III'][0]->jml; ?>;
-            document.getElementById("KelasPersen").innerHTML = <?php echo substr($Kelas['III'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("KelasJml").innerHTML = <?= $Kelas['III'][0]->jml; ?>;
+            document.getElementById("KelasPersen").innerHTML = <?= substr($Kelas['III'][0]->persen, 0, 5); ?> + "%";
         } else {
-            document.getElementById("KelasJml").innerHTML = <?php echo $Kelas['Semua'][0]->jml; ?>;
-            document.getElementById("KelasPersen").innerHTML = <?php echo substr($Kelas['Semua'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("KelasJml").innerHTML = <?= $Kelas['Semua'][0]->jml; ?>;
+            document.getElementById("KelasPersen").innerHTML = <?= substr($Kelas['Semua'][0]->persen, 0, 5); ?> + "%";
         }
     }
 
@@ -332,17 +328,17 @@
         }
 
         if (jenis == 'Produktif') {
-            document.getElementById("MapelJml").innerHTML = <?php echo $MataPelajaran['Produktif'][0]->jml; ?>;
-            document.getElementById("MapelPersen").innerHTML = <?php echo substr($MataPelajaran['Produktif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("MapelJml").innerHTML = <?= $MataPelajaran['Produktif'][0]->jml; ?>;
+            document.getElementById("MapelPersen").innerHTML = <?= substr($MataPelajaran['Produktif'][0]->persen, 0, 5); ?> + "%";
         } else if (jenis == 'Adaptif') {
-            document.getElementById("MapelJml").innerHTML = <?php echo $MataPelajaran['Adaptif'][0]->jml; ?>;
-            document.getElementById("MapelPersen").innerHTML = <?php echo substr($MataPelajaran['Adaptif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("MapelJml").innerHTML = <?= $MataPelajaran['Adaptif'][0]->jml; ?>;
+            document.getElementById("MapelPersen").innerHTML = <?= substr($MataPelajaran['Adaptif'][0]->persen, 0, 5); ?> + "%";
         } else if (jenis == 'Normatif') {
-            document.getElementById("MapelJml").innerHTML = <?php echo $MataPelajaran['Normatif'][0]->jml; ?>;
-            document.getElementById("MapelPersen").innerHTML = <?php echo substr($MataPelajaran['Normatif'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("MapelJml").innerHTML = <?= $MataPelajaran['Normatif'][0]->jml; ?>;
+            document.getElementById("MapelPersen").innerHTML = <?= substr($MataPelajaran['Normatif'][0]->persen, 0, 5); ?> + "%";
         } else {
-            document.getElementById("MapelJml").innerHTML = <?php echo $MataPelajaran['Semua'][0]->jml; ?>;
-            document.getElementById("MapelPersen").innerHTML = <?php echo substr($MataPelajaran['Semua'][0]->persen, 0, 5); ?> + "%";
+            document.getElementById("MapelJml").innerHTML = <?= $MataPelajaran['Semua'][0]->jml; ?>;
+            document.getElementById("MapelPersen").innerHTML = <?= substr($MataPelajaran['Semua'][0]->persen, 0, 5); ?> + "%";
         }
     }
 </script>
