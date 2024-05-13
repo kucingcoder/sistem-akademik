@@ -163,7 +163,7 @@
                                     <div class="activite-label"><?= substr($jadwal->mulai, 0, 5); ?></div>
                                     <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                                     <div class="activity-content">
-                                        <a href="<?= "/pelaksanaan-kbm/" . strtolower(str_replace(" ", "-", substr(strstr($jadwal->teks, "Kelas"), strlen("Kelas ")))) . "/" . strtolower(str_replace("/", "=", str_replace(" ", "-", strstr($jadwal->teks, " di Kelas", true)))) . "/" . substr($jadwal->mulai, 0, 5); ?>" class="fw-bold text-dark"><?= str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
+                                        <a href="<?= "/pelaksanaan-kbm/" . $jadwal->kode_mapel .  "/" . substr($jadwal->mulai, 0, 5) . "/" . substr($jadwal->selesai, 0, 5) ?>" class="fw-bold text-dark"><?= str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

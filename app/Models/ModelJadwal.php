@@ -10,7 +10,7 @@ class ModelJadwal extends Model
 
     public function JadwalHariIni($nip)
     {
-        $this->select("ampu_mapel.id_ampu, MIN(jadwal.mulai) AS mulai, CONCAT(mata_pelajaran.nama_mapel, ' di Kelas ', kelas.nama_kelas) as teks");
+        $this->select("ampu_mapel.id_ampu as kode_mapel, MIN(jadwal.mulai) AS mulai, MIN(jadwal.selesai) AS selesai, CONCAT(mata_pelajaran.nama_mapel, ' di Kelas ', kelas.nama_kelas) AS teks");
         $this->join("ampu_mapel", "ampu_mapel.id_ampu = jadwal.ampu_mapel_id_ampu");
         $this->join("mata_pelajaran", "mata_pelajaran.id_mapel = ampu_mapel.mata_pelajaran_id_mapel");
         $this->join("kelas", "kelas.id_kelas = ampu_mapel.kelas_id_kelas");
