@@ -127,6 +127,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
+                            <img src="<?= base_url(session()->get("foto")) ?>" alt="Foto" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; object-position: center; margin-bottom: 10px;">
                             <h6><?= session()->get("nama") ?></h6>
                             <span><?= session()->get("jabatan") . " (" . session()->get("jenis") . ")" ?></span>
                         </li>
