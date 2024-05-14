@@ -20,7 +20,7 @@
     <link href="<?= base_url('assets/vendor/quill/quill.snow.css'); ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/quill/quill.bubble.css'); ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/remixicon/remixicon.css'); ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/vendor/simple-datatables/style.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/vendor/datatables/datatables.min.css'); ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
 </head>
 
@@ -248,7 +248,7 @@
     <script src="<?= base_url('assets/vendor/chart.js/chart.umd.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/echarts/echarts.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/quill/quill.min.js'); ?>"></script>
-    <script src="<?= base_url('assets/vendor/simple-datatables/simple-datatables.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/datatables/datatables.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/tinymce/tinymce.min.js'); ?>"></script>
     <script src="<?= base_url('assets/vendor/php-email-form/validate.js'); ?>"></script>
     <script src="<?= base_url('assets/js/main.js'); ?>"></script>
