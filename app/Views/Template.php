@@ -27,7 +27,7 @@
 <body>
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="Dashboard.html" class="logo d-flex align-items-center">
+            <a href="/dashboard" class="logo d-flex align-items-center">
                 <img src="<?= base_url('assets/img/blogo.png'); ?>" alt="logo SMK">
                 <span class="d-none d-lg-block">SMK Bahari Tegal</span>
             </a>
