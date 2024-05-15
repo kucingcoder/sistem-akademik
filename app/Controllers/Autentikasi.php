@@ -24,13 +24,21 @@ class Autentikasi extends BaseController
             return redirect()->to("/");
         }
 
+        $Foto = "foto-profil/";
+
+        if (empty($Guru["foto"])) {
+            $Foto .= "default.jpg";
+        } else {
+            $Foto .= $Guru["foto"];
+        }
+
         $Data = [
             "nip"     => $Guru["nip"],
             "inisial" => $Guru["inisial"],
             "nama"    => $Guru["nama"],
             "jabatan" => $Guru["jabatan"],
             "jenis"   => $Guru["jenis"],
-            "foto"    => "foto-profil/" . $Guru["foto"],
+            "foto"    => $Foto,
             "sesi"    => true
         ];
 
