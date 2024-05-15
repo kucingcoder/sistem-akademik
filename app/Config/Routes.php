@@ -15,4 +15,7 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
     $routes->get('/auth', 'Autentikasi::Keluar');
 
     $routes->get('/dashboard', 'Dashboard::Index');
+
+    $routes->get("/pelaksanaan-kbm/(:segment)/(:segment)/(:segment)", "PelaksanaanKBM::index/$1/$2/$3");
+    $routes->post('/pelaksanaan-kbm/simpan-absensi', 'PelaksanaanKBM::SimpanAbsensi');
 });
