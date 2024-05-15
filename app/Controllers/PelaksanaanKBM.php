@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ModelJadwal;
+use App\Models\ModelKBM;
 use App\Models\ModelSiswa;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -13,11 +14,23 @@ class PelaksanaanKBM extends BaseController
     {
         $Jadwal = new ModelJadwal();
         $Siswa  = new ModelSiswa();
+        $KBM    = new ModelKBM();
+
+        $idKBM    =  str_replace(":", "", $input1 . date('d') . date('m') . date('Y') . $input2 . $input3);
+
+        $Ada = $KBM->where('id_kbm', $idKBM)->countAllResults();
+
+        $Presensi = false;
+
+        if ($Ada > 0) {
+            $Presensi = true;
+        }
 
         $Info        = $Jadwal->PelaksanaanKBM($input1);
         $DaftarSiswa = $Siswa->DaftarSiswaDiKelas($Info["nama_kelas"]);
 
         $data = array(
+            "Presensi"      => $Presensi,
             "Kode"          => $input1,
             "Mapel"         => $Info["nama_mapel"],
             "Kelas"         => $Info["nama_kelas"],
@@ -34,7 +47,7 @@ class PelaksanaanKBM extends BaseController
     {
         $Json = $this->request->getJSON();
 
-        $idKBM        = $Json->kode . "-" . date('d') . date('m') . date('Y') . "-" . date('H') . date('i');
+        $idKBM        = str_replace(":", "", $Json->kode . date('d') . date('m') . date('Y') . $Json->mulai . $Json->sampai);
         $Tanggal      = date('Y-m-d');
         $Materi       = $Json->materi;
         $UraianMateri = $Json->uraian_materi;
