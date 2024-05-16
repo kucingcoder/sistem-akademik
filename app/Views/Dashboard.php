@@ -1,6 +1,7 @@
 <?= $this->extend('Template') ?>
 
 <?= $this->section('Judul') ?>SMK Bahari Tegal - Dashboard<?= $this->endSection() ?>
+<?= $this->section('Menu') ?>dashboard<?= $this->endSection() ?>
 
 <?= $this->section('Konten') ?>
 <div class="pagetitle">

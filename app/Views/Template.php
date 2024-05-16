@@ -160,65 +160,64 @@
 
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
-
             <li class="nav-item">
-                <a class="nav-link " href="/dashboard">
+                <a class="nav-link collapsed" href="/dashboard" id="dashboard">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/kbm">
+                <a class="nav-link collapsed" href="/kbm" id="kbm">
                     <i class="bi bi-journal-check"></i>
                     <span>KBM</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/profil">
+                <a class="nav-link collapsed" href="/profil" id="profil-saya">
                     <i class="bi bi-person-fill"></i>
                     <span>Profil Saya</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/siswa">
+                <a class="nav-link collapsed" href="/siswa" id="siswa">
                     <i class="bi bi-people"></i>
                     <span>Siswa</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/guru">
+                <a class="nav-link collapsed" href="/guru" id="guru">
                     <i class="bi bi-people-fill"></i>
                     <span>Guru</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/kelas">
+                <a class="nav-link collapsed" href="/kelas" id="kelas">
                     <i class="bi bi-person-square"></i>
                     <span>Kelas</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/mata-pelajaran">
+                <a class="nav-link collapsed" href="/mata-pelajaran" id="mata-pelajaran">
                     <i class="bi bi-journals"></i>
                     <span>Mata Pelajaran</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/jadwal-pelajaran">
+                <a class="nav-link collapsed" href="/jadwal-pelajaran" id="jadwal-pelajaran">
                     <i class="bi bi-journal-text"></i>
                     <span>Jadwal Pelajaran</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/tahun-akademik">
+                <a class="nav-link collapsed" href="/tahun-akademik" id="tahun-akademik">
                     <i class="bi bi-list-stars"></i>
                     <span>Tahun Akademik</span>
                 </a>
@@ -253,6 +252,11 @@
     <script src="<?= base_url('assets/vendor/php-email-form/validate.js'); ?>"></script>
     <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 </body>
+
+<script>
+    var element = document.getElementById("<?= $this->renderSection('Menu') ?>");
+    element.classList.remove('collapsed');
+</script>
 
 <?= $this->renderSection('SkripJS') ?>
 
