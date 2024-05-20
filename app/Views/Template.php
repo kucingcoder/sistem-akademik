@@ -181,14 +181,14 @@
                 </a>
             </li>
 
-            <?php if (session()->get("jenis") == "staff admin") : ?>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="/siswa" id="siswa">
-                        <i class="bi bi-people"></i>
-                        <span>Siswa</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/siswa" id="siswa">
+                    <i class="bi bi-people"></i>
+                    <span>Siswa</span>
+                </a>
+            </li>
 
+            <?php if (session()->get("jenis") == "staff admin") : ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="/guru" id="guru">
                         <i class="bi bi-people-fill"></i>
