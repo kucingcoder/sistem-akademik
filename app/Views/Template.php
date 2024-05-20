@@ -181,42 +181,42 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/siswa" id="siswa">
-                    <i class="bi bi-people"></i>
-                    <span>Siswa</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/guru" id="guru">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Guru</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/kelas" id="kelas">
-                    <i class="bi bi-person-square"></i>
-                    <span>Kelas</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/mata-pelajaran" id="mata-pelajaran">
-                    <i class="bi bi-journals"></i>
-                    <span>Mata Pelajaran</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/jadwal-pelajaran" id="jadwal-pelajaran">
-                    <i class="bi bi-journal-text"></i>
-                    <span>Jadwal Pelajaran</span>
-                </a>
-            </li>
-
             <?php if (session()->get("jenis") == "staff admin") : ?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/siswa" id="siswa">
+                        <i class="bi bi-people"></i>
+                        <span>Siswa</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/guru" id="guru">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Guru</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/kelas" id="kelas">
+                        <i class="bi bi-person-square"></i>
+                        <span>Kelas</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/mata-pelajaran" id="mata-pelajaran">
+                        <i class="bi bi-journals"></i>
+                        <span>Mata Pelajaran</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/jadwal-pelajaran" id="jadwal-pelajaran">
+                        <i class="bi bi-journal-text"></i>
+                        <span>Jadwal Pelajaran</span>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="/tahun-akademik" id="tahun-akademik">
                         <i class="bi bi-list-stars"></i>
