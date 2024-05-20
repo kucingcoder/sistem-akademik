@@ -33,6 +33,13 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
     $routes->post("/kbm/nilai-uts", "KBM::UpdateNilaiUTS");
     $routes->get("/kbm/nilai-uas", "KBM::DaftarNilaiUAS");
     $routes->post("/kbm/nilai-uas", "KBM::UpdateNilaiUAS");
+
+    $routes->get("/profil", "ProfilSaya::index");
+    $routes->post("/profil/ubah-profil", "ProfilSaya::UbahProfil");
+    $routes->get("/profil/deskripsi-kelas", "ProfilSaya::DeskripsiKelas");
+    $routes->post("/profil/ubah-username-password", "ProfilSaya::UbahUsernamePassword");
+    $routes->post("/profil/tambah-dokumen", "ProfilSaya::TambahDokumen");
+    $routes->get("/profil/info-dokumen", "ProfilSaya::InfoDokumen");
 });
 
 $routes->group('', ['filter' => 'admin'], function ($routes) {

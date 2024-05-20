@@ -24,19 +24,19 @@ class ModelDokumenGuru extends Model
         $data = [
             "nama_dokumen" => $NamaDokumen,
             "deskripsi" => $DeskripsiDokumen,
-            "file" => $NamaDokumen,
+            "file" => $NamaFile,
             "guru_nip" => $nip
         ];
 
         return $this->insert($data);
     }
 
-    function GantiNip($id_Dokumen, $nip_baru)
+    function
+    InfoDokumen($IdDokumen)
     {
-        $data = [
-            "guru_nip" => $nip_baru
-        ];
+        $this->select("nama_dokumen as nama, deskripsi, file");
+        $this->where("id_dokumen_guru", $IdDokumen);
 
-        return $this->update($id_Dokumen, $data);
+        return $this->first();
     }
 }

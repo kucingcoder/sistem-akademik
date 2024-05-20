@@ -8,7 +8,7 @@ class ModelGuru extends Model
 {
     protected $table = "guru";
     protected $primaryKey = "nip";
-    protected $allowedFields = ["nip", "nik", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status", "jenis"];
+    protected $allowedFields = ["nik", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status", "jenis"];
 
     public function Masuk($username, $password)
     {
@@ -93,7 +93,7 @@ class ModelGuru extends Model
 
     function Profil($nip)
     {
-        $this->select("nip, nik, nama AS nama_lengkap, jenis_kelamin AS gender, agama, status_kawin AS status_perkawinan, tempat_lahir, tanggal_lahir, no_hp AS no_telp, email, alamat_domisili AS alamat, kompetensi, lulusan_tahun, lulusan AS asal_perguruan_tinggi, jabatan");
+        $this->select("nip, nik, nama AS nama_lengkap, jenis_kelamin AS gender, agama, status_kawin AS status_perkawinan, tempat_lahir, tanggal_lahir, no_hp AS no_telp, email, alamat_domisili AS alamat, kompetensi, lulusan_tahun, lulusan AS asal_perguruan_tinggi, jabatan, foto");
         $this->join("agama", "agama.id_agama = guru.agama_id_agama");
         $this->join("jenis_kelamin", "jenis_kelamin.id_jk = guru.jenis_kelamin_id_jk");
         $this->join("status_kawin", "status_kawin.id_status = guru.status_kawin_id_status");
@@ -102,21 +102,11 @@ class ModelGuru extends Model
         return $this->first();
     }
 
-    function UbahProfil($nip_lama, $nip, $nik, $nama_lengkap, $gender, $agama, $status_perkawinan, $tempat_lahir, $tanggal_lahir, $no_telp, $email, $alamat, $kompetensi, $lulusan_tahun, $asal_perguruan_tinggi, $jabatan, $foto)
+    function UbahProfil($nip, $nik, $gender, $agama, $status_perkawinan, $tempat_lahir, $tanggal_lahir, $no_telp, $email, $alamat, $kompetensi, $lulusan_tahun, $asal_perguruan_tinggi, $jabatan, $foto)
     {
-        $Dokumen = new ModelDokumenGuru();
-
         try {
-            $DaftarDokumen = $Dokumen->Dokumentasi($nip_lama);
-
-            foreach ($DaftarDokumen as $Item) {
-                $Dokumen->GantiNip($Item->id_dokumen_guru, null);
-            }
-
             $data = [
-                "nip"                    => $nip,
                 "nik"                    => $nik,
-                "nama"                   => $nama_lengkap,
                 "jenis_kelamin_id_jk"    => $gender,
                 "agama_id_agama"         => $agama,
                 "status_kawin_id_status" => $status_perkawinan,
@@ -132,11 +122,7 @@ class ModelGuru extends Model
                 "foto"                   => $foto
             ];
 
-            $this->update($nip_lama, $data);
-
-            foreach ($DaftarDokumen as $Item) {
-                $Dokumen->GantiNip($Item->id_dokumen_guru, $nip);
-            }
+            $this->update($nip, $data);
 
             return true;
         } catch (\Throwable $th) {
