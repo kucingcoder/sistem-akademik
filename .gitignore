@@ -124,6 +124,3 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
-
-public/foto-profil/*
-public/dokumen/*
