@@ -61,15 +61,15 @@
             <div class="card">
                 <div class="card-body">
                     <?php if (!empty($JadwalHariIni)) : ?>
-                        <h5 class="card-title">KBM Hari Ini <span>| <?php echo count($JadwalHariIni); ?> Kelas</span></h5>
+                        <h5 class="card-title">KBM Hari Ini <span>| <?= count($JadwalHariIni); ?> Kelas</span></h5>
 
                         <div class="activity">
                             <?php foreach ($JadwalHariIni as $jadwal) : ?>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label"><?php echo substr($jadwal->mulai, 0, 5); ?></div>
+                                    <div class="activite-label"><?= substr($jadwal->mulai, 0, 5); ?></div>
                                     <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                                     <div class="activity-content">
-                                        <a href="<?php echo "pelaksanaan-kbm/" . strtolower(str_replace(" ", "-", substr(strstr($jadwal->teks, "Kelas"), strlen("Kelas ")))) . "/" . strtolower(str_replace("/", "=", str_replace(" ", "-", strstr($jadwal->teks, " di Kelas", true)))) . "/" . substr($jadwal->mulai, 0, 5); ?>" class="fw-bold text-dark"><?php echo str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
+                                        <a href="<?= "/pelaksanaan-kbm/" . $jadwal->kode_mapel .  "/" . substr($jadwal->mulai, 0, 5) . "/" . substr($jadwal->selesai, 0, 5) ?>" class="fw-bold text-dark"><?= str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $jadwal->teks); ?></a>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
