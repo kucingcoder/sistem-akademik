@@ -16,6 +16,7 @@ class ModelSiswa extends Model
         $this->join("kelas", "siswa.kelas = kelas.id_kelas");
         $this->where("kelas.nama_kelas", $Kelas);
         $this->where("siswa.status_id_status", "A");
+        $this->orderBy("siswa.nama", "ASC");
 
         $query = $this->get();
         return $query->getResult();
