@@ -34,3 +34,7 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
     $routes->get("/kbm/nilai-uas", "KBM::DaftarNilaiUAS");
     $routes->post("/kbm/nilai-uas", "KBM::UpdateNilaiUAS");
 });
+
+$routes->group('', ['filter' => 'admin'], function ($routes) {
+    $routes->get("/tahun-akademik", "TahunAkademik::index");
+});

@@ -216,12 +216,14 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/tahun-akademik" id="tahun-akademik">
-                    <i class="bi bi-list-stars"></i>
-                    <span>Tahun Akademik</span>
-                </a>
-            </li>
+            <?php if (session()->get("jenis") == "staff admin") : ?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/tahun-akademik" id="tahun-akademik">
+                        <i class="bi bi-list-stars"></i>
+                        <span>Tahun Akademik</span>
+                    </a>
+                </li>
+            <?php endif; ?>
 
             <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="/rekapitulasi">

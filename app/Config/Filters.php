@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\Admin;
 use App\Filters\Sesi;
 use App\Filters\Umum;
 use CodeIgniter\Config\Filters as BaseFilters;
@@ -38,6 +39,7 @@ class Filters extends BaseFilters
         'performance'   => PerformanceMetrics::class,
         'umum'          => Umum::class,
         'sesi'          => Sesi::class,
+        'admin'         => Admin::class,
     ];
 
     /**
