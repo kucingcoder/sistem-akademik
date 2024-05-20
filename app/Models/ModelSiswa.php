@@ -24,7 +24,7 @@ class ModelSiswa extends Model
 
     function DaftarNilai($Kelas)
     {
-        $this->select('siswa.nis, siswa.nama, siswa.jenis_kelamin_id_jk as gender, 0 as nilai');
+        $this->select('0 as id_detil, siswa.nis, siswa.nama, siswa.jenis_kelamin_id_jk as gender, 0 as nilai');
         $this->join('kelas', 'siswa.kelas = kelas.id_kelas');
         $this->where('kelas.nama_kelas', $Kelas);
         $this->orderBy('siswa.nama');

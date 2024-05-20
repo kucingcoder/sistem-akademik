@@ -28,4 +28,9 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
     $routes->get("/kbm/penugasan", "KBM::Penugasan");
     $routes->get("/kbm/detail-tugas", "KBM::DetailTugas");
     $routes->get("/kbm/nilai-tugas", "KBM::DaftarNilaiTugas");
+    $routes->post("/kbm/nilai-tugas", "KBM::UpdateNilaiTugas");
+    $routes->get("/kbm/nilai-uts", "KBM::DaftarNilaiUTS");
+    $routes->post("/kbm/nilai-uts", "KBM::UpdateNilaiUTS");
+    $routes->get("/kbm/nilai-uas", "KBM::DaftarNilaiUAS");
+    $routes->post("/kbm/nilai-uas", "KBM::UpdateNilaiUAS");
 });

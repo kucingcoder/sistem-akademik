@@ -64,10 +64,10 @@
                                         <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" onclick="DaftarTugas()">Penugasan</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="riwayatampu-tab" data-bs-toggle="tab" data-bs-target="#riwayatampu" type="button" role="tab" aria-controls="riwayatampu" aria-selected="false">Penilaian UTS</button>
+                                        <button class="nav-link" id="riwayatampu-tab" data-bs-toggle="tab" data-bs-target="#riwayatampu" type="button" role="tab" aria-controls="riwayatampu" aria-selected="false" onclick="InfoNilaiUTS(kelas_terpilih, mapel_terpilih)">Penilaian UTS</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">Penilaian UAS</button>
+                                        <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false" onclick="InfoNilaiUAS(kelas_terpilih, mapel_terpilih)">Penilaian UAS</button>
                                     </li>
                                 </ul>
 
@@ -78,69 +78,11 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-                                        <h5 class="card-title">Penilaian Ujian Akhir Semester <span>| nama mapel kelas</span></h5>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">NIS</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Gender</th>
-                                                    <th scope="col">Nilai</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>28</td>
-                                                    <td>Brandon Jacob</td>
-                                                    <td>Laki-Laki</td>
-                                                    <td>
-                                                        <form>
-                                                            <input type="number" class="form-control">
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary"><a href="kbm">Simpan</a></button>
-                                    </div> -->
-
                                     <div class="tab-pane fade" id="riwayatampu" role="tabpanel" aria-labelledby="riwayatampu-tab">
                                         <div class="my-5 d-flex justify-content-center">
                                             <div class="spinner-border text-primary" role="status"></div>
                                         </div>
                                     </div>
-
-                                    <!-- <div class="tab-pane fade" id="riwayatampu" role="tabpanel" aria-labelledby="riwayatampu-tab">
-                                        <h5 class="card-title">Penilaian Ujian Tengah Semester <span>| nama mapel kelas</span></h5>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">NIS</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Gender</th>
-                                                    <th scope="col">Nilai</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>28</td>
-                                                    <td>Brandon Jacob</td>
-                                                    <td>Laki-Laki</td>
-                                                    <td>
-                                                        <form>
-                                                            <input type="number" class="form-control">
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary"><a href="kbm">Simpan</a></button>
-                                    </div> -->
 
                                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                         <div class="my-5 d-flex justify-content-center">
@@ -379,7 +321,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#tempat-1">Kembali</button>
-                <button type="button" class="btn btn-primary"><a href="kbm">Simpan</a></button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tempat-1" onclick="UpdateNilaiTugas(id_tugas_terpilih, kelas_terpilih, mapel_terpilih)">Simpan</button>
             </div>
         </div>
     </div>
@@ -457,7 +399,7 @@
         pertemuan.classList.add("active");
     });
 
-    let kelas_terpilih, mapel_terpilih;
+    let kelas_terpilih, mapel_terpilih, id_tugas_terpilih;
 
     function Pertemuan(kelas, mapel) {
         kelas_terpilih = kelas;
@@ -814,8 +756,12 @@
         document.getElementById("DetailTugas-Uraian").setAttribute("disabled", "disabled");
     }
 
+    var PerubahanNilaiTugas = {};
+
     function InfoNilaiTugas(id_tugas, nama_kelas, nama_mapel, nama_tugas) {
-        PerubahanNilai = {};
+        PerubahanNilaiTugas = {};
+
+        id_tugas_terpilih = id_tugas;
 
         fetch("/kbm/nilai-tugas?kelas=" + nama_kelas + "&mapel=" + nama_mapel + "&id=" + id_tugas)
             .then(response => {
@@ -828,13 +774,15 @@
                 if (Array.isArray(data)) {
                     var baris = "";
                     data.forEach(function(item, index) {
+                        UbahNilaiTugas(item.id_detil, item.nis, item.nilai)
+
                         baris += `
                             <tr class="align-middle">
                                 <th class="text-center">${index + 1}</th>
                                 <td class="text-center">${item.nis}</td>
                                 <td>${item.nama}</td>
                                 <td class="text-center">${(item.gender === 'L') ? 'Laki-Laki' : (item.gender === 'P') ? 'Perempuan' : ''}</td>
-                                <td> <input type="number" min="0" max="100" value="${item.nilai}" class="form-control"></td>
+                                <td> <input type="number" min="0" max="100" value="${item.nilai}" class="form-control" onchange="UbahNilaiTugas('${item.id_detil}','${item.nis}',this.value)"></td>
                             </tr>
                          `;
                     });
@@ -851,6 +799,275 @@
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    function UbahNilaiTugas(id_detil, nis, nilai) {
+        if (!PerubahanNilaiTugas[nis]) {
+            PerubahanNilaiTugas[nis] = [];
+        }
+
+        var existingIndex = PerubahanNilaiTugas[nis].findIndex(function(data) {
+            return data.id_detil === id_detil;
+        });
+
+        if (existingIndex !== -1) {
+            PerubahanNilaiTugas[nis][existingIndex].nilai = nilai;
+        } else {
+            PerubahanNilaiTugas[nis].push({
+                id_detil: id_detil,
+                nilai: nilai
+            });
+        }
+    }
+
+    function UpdateNilaiTugas(id_tugas, kelas, mapel) {
+        var data = [];
+        for (var key in PerubahanNilaiTugas) {
+            PerubahanNilaiTugas[key].forEach(function(item) {
+                var obj = {
+                    nis: key,
+                    id_detil: item.id_detil,
+                    nilai: item.nilai
+                };
+                data.push(obj);
+            });
+        }
+
+        fetch("/kbm/nilai-tugas?id=" + id_tugas + "&kelas=" + kelas + "&mapel=" + mapel, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status === 404) {
+                    alert('Gagal');
+                }
+            })
+            .catch(error => {
+                alert('Gagal');
+            });
+    }
+
+    var PerubahanNilaiUTS = {};
+
+    function InfoNilaiUTS(nama_kelas, nama_mapel) {
+        PerubahanNilaiUTS = {};
+
+        fetch("/kbm/nilai-uts?kelas=" + nama_kelas + "&mapel=" + nama_mapel)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (Array.isArray(data)) {
+                    var baris = "";
+                    data.forEach(function(item, index) {
+                        UbahNilaiUTS(item.id_detil, item.nis, item.nilai)
+
+                        baris += `
+                                <tr class="align-middle">
+                                    <th class="text-center">${index + 1}</th>
+                                    <td class="text-center">${item.nis}</td>
+                                    <td>${item.nama}</td>
+                                    <td class="text-center">${(item.gender === 'L') ? 'Laki-Laki' : (item.gender === 'P') ? 'Perempuan' : ''}</td>
+                                    <td> <input type="number" min="0" max="100" value="${item.nilai}" class="form-control" onchange="UbahNilaiUTS('${item.id_detil}','${item.nis}',this.value)"></td>
+                                </tr>
+                        `;
+                    });
+
+                    var isi = `
+                            <h5 class="card-title">Penilaian Ujian Tengah Semester <span>| ${nama_mapel}</span></h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped w-100" id="daftar-nilai-uts">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">NIS</th>
+                                            <th class="text-center">Nama</th>
+                                            <th>Gender</th>
+                                            <th class="text-center">Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${baris}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="UpdateNilaiUTS('${nama_kelas}', '${nama_mapel}')">Simpan</button>
+                        `;
+
+                    var penugasan = document.getElementById("riwayatampu");
+                    penugasan.innerHTML = isi;
+
+                    $("#daftar-nilai-uts").DataTable();
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    function UbahNilaiUTS(id_detil, nis, nilai) {
+        if (!PerubahanNilaiUTS[nis]) {
+            PerubahanNilaiUTS[nis] = [];
+        }
+
+        var existingIndex = PerubahanNilaiUTS[nis].findIndex(function(data) {
+            return data.id_detil === id_detil;
+        });
+
+        if (existingIndex !== -1) {
+            PerubahanNilaiUTS[nis][existingIndex].nilai = nilai;
+        } else {
+            PerubahanNilaiUTS[nis].push({
+                id_detil: id_detil,
+                nilai: nilai
+            });
+        }
+    }
+
+    function UpdateNilaiUTS(kelas, mapel) {
+        var data = [];
+        for (var key in PerubahanNilaiUTS) {
+            PerubahanNilaiUTS[key].forEach(function(item) {
+                var obj = {
+                    nis: key,
+                    id_detil: item.id_detil,
+                    nilai: item.nilai
+                };
+                data.push(obj);
+            });
+        }
+
+        fetch("/kbm/nilai-uts?kelas=" + kelas + "&mapel=" + mapel, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status === 404) {
+                    alert('Gagal');
+                }
+            })
+            .catch(error => {
+                alert('Gagal');
+            });
+    }
+
+    var PerubahanNilaiUAS = {};
+
+    function InfoNilaiUAS(nama_kelas, nama_mapel) {
+        PerubahanNilaiUAS = {};
+
+        fetch("/kbm/nilai-uas?kelas=" + nama_kelas + "&mapel=" + nama_mapel)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (Array.isArray(data)) {
+                    var baris = "";
+                    data.forEach(function(item, index) {
+                        UbahNilaiUAS(item.id_detil, item.nis, item.nilai)
+
+                        baris += `
+                                <tr class="align-middle">
+                                    <th class="text-center">${index + 1}</th>
+                                    <td class="text-center">${item.nis}</td>
+                                    <td>${item.nama}</td>
+                                    <td class="text-center">${(item.gender === 'L') ? 'Laki-Laki' : (item.gender === 'P') ? 'Perempuan' : ''}</td>
+                                    <td> <input type="number" min="0" max="100" value="${item.nilai}" class="form-control" onchange="UbahNilaiUAS('${item.id_detil}','${item.nis}',this.value)"></td>
+                                </tr>
+                        `;
+                    });
+
+                    var isi = `
+                            <h5 class="card-title">Penilaian Ujian Akhir Semester <span>| ${nama_mapel}</span></h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped w-100" id="daftar-nilai-uas">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">NIS</th>
+                                            <th class="text-center">Nama</th>
+                                            <th>Gender</th>
+                                            <th class="text-center">Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${baris}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="UpdateNilaiUAS('${nama_kelas}', '${nama_mapel}')">Simpan</button>
+                        `;
+
+                    var penugasan = document.getElementById("tab3");
+                    penugasan.innerHTML = isi;
+
+                    $("#daftar-nilai-uas").DataTable();
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    function UbahNilaiUAS(id_detil, nis, nilai) {
+        if (!PerubahanNilaiUAS[nis]) {
+            PerubahanNilaiUAS[nis] = [];
+        }
+
+        var existingIndex = PerubahanNilaiUAS[nis].findIndex(function(data) {
+            return data.id_detil === id_detil;
+        });
+
+        if (existingIndex !== -1) {
+            PerubahanNilaiUAS[nis][existingIndex].nilai = nilai;
+        } else {
+            PerubahanNilaiUAS[nis].push({
+                id_detil: id_detil,
+                nilai: nilai
+            });
+        }
+    }
+
+    function UpdateNilaiUAS(kelas, mapel) {
+        var data = [];
+        for (var key in PerubahanNilaiUAS) {
+            PerubahanNilaiUAS[key].forEach(function(item) {
+                var obj = {
+                    nis: key,
+                    id_detil: item.id_detil,
+                    nilai: item.nilai
+                };
+                data.push(obj);
+            });
+        }
+
+        fetch("/kbm/nilai-uas?kelas=" + kelas + "&mapel=" + mapel, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status === 404) {
+                    alert('Gagal');
+                }
+            })
+            .catch(error => {
+                alert('Gagal');
             });
     }
 </script>
