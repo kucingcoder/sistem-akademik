@@ -22,6 +22,17 @@ class ModelSiswa extends Model
         return $query->getResult();
     }
 
+    function DaftarNilai($Kelas)
+    {
+        $this->select('siswa.nis, siswa.nama, siswa.jenis_kelamin_id_jk as gender, 0 as nilai');
+        $this->join('kelas', 'siswa.kelas = kelas.id_kelas');
+        $this->where('kelas.nama_kelas', $Kelas);
+        $this->orderBy('siswa.nama');
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
     function DaftarSiswaAktif()
     {
         $this->select("siswa.nis, siswa.nama, kelas.nama_kelas AS kelas, jenis_kelamin.jenis_kelamin AS gender");

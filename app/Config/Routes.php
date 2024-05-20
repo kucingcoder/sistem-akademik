@@ -18,4 +18,14 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
 
     $routes->get("/pelaksanaan-kbm/(:segment)/(:segment)/(:segment)", "PelaksanaanKBM::index/$1/$2/$3");
     $routes->post('/pelaksanaan-kbm/simpan-absensi', 'PelaksanaanKBM::SimpanAbsensi');
+
+    $routes->get("/kbm", "KBM::index");
+    $routes->get("/kbm/pertemuan", "KBM::Pertemuan");
+    $routes->get("/kbm/detail-pertemuan", "KBM::DetailPertemuan");
+    $routes->get("/kbm/kehadiran", "KBM::Kehadiran");
+    $routes->post("/kbm/kehadiran", "KBM::Updatekehadiran");
+    $routes->post("/kbm/tambah-tugas", "KBM::TambahTugas");
+    $routes->get("/kbm/penugasan", "KBM::Penugasan");
+    $routes->get("/kbm/detail-tugas", "KBM::DetailTugas");
+    $routes->get("/kbm/nilai-tugas", "KBM::DaftarNilaiTugas");
 });
