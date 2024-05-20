@@ -45,7 +45,6 @@ class TahunAkademik extends BaseController
             );
 
             $data = array(
-                "Nama"          => session()->get("nama"),
                 "JadwalHariIni" => $JadwalHariIni,
                 "Kaldik"        => $DataKaldik,
                 "TahunAjaran"   => $Tahun->TahunAjaranSekarang(),
