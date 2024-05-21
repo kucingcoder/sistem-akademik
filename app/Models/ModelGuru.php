@@ -171,4 +171,14 @@ class ModelGuru extends Model
 
         return $this->insert($data);
     }
+
+    function DaftarGuru()
+    {
+        $this->select("nip, nama");
+        $this->where("inisial IS NOT NULL");
+        $this->orderBy("nama", "ASC");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
 }

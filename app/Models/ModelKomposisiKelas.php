@@ -7,6 +7,7 @@ use CodeIgniter\Model;
 class ModelKomposisiKelas extends Model
 {
     protected $table = "komposisi_kelas";
+    protected $allowedFields = ["kode_unik", "nis", "kelas_id_kelas"];
 
     function DataTingkat($tingkat)
     {
@@ -78,5 +79,28 @@ class ModelKomposisiKelas extends Model
 
         $query = $this->get();
         return $query->getResult();
+    }
+
+    function InfoKelasSebelumya($Kode)
+    {
+        $this->select("komposisi_kelas.kode_unik, siswa.nis AS siswa_nis, siswa.nama, kelas.nama_kelas");
+        $this->join("siswa", "siswa.nis = komposisi_kelas.siswa_nis");
+        $this->join("kelas", "kelas.id_kelas = komposisi_kelas.kelas_id_kelas");
+        $this->where("komposisi_kelas.kode_unik", $Kode);
+
+        return $this->first();
+    }
+
+    function HapusSiswaDariKelas($KodeUnik)
+    {
+        $this->where("kode_unik", $KodeUnik);
+        return $this->delete();
+    }
+
+    function PindahKelas($kodeUnik, $IdKelas)
+    {
+        return $this->where("kode_unik", $kodeUnik)
+            ->set("kelas_id_kelas", $IdKelas)
+            ->update();
     }
 }

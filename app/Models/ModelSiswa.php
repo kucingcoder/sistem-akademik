@@ -24,10 +24,10 @@ class ModelSiswa extends Model
 
     function DaftarNilai($Kelas)
     {
-        $this->select('0 as id_detil, siswa.nis, siswa.nama, siswa.jenis_kelamin_id_jk as gender, 0 as nilai');
-        $this->join('kelas', 'siswa.kelas = kelas.id_kelas');
-        $this->where('kelas.nama_kelas', $Kelas);
-        $this->orderBy('siswa.nama');
+        $this->select("0 as id_detil, siswa.nis, siswa.nama, siswa.jenis_kelamin_id_jk as gender, 0 as nilai");
+        $this->join("kelas", "siswa.kelas = kelas.id_kelas");
+        $this->where("kelas.nama_kelas", $Kelas);
+        $this->orderBy("siswa.nama");
 
         $query = $this->get();
         return $query->getResult();
@@ -157,5 +157,33 @@ class ModelSiswa extends Model
         ];
 
         return $this->update($nis, $data);
+    }
+
+    function CalonKelas($IdJurusan)
+    {
+        $this->select("siswa.nis, siswa.nama, jurusan.jurusan, kelas.nama_kelas AS kelas_sebelumnya");
+        $this->join("jurusan", "jurusan.id_jurusan = siswa.jurusan_id_jurusan");
+        $this->join("komposisi_kelas", "komposisi_kelas.siswa_nis = siswa.nis", "left");
+        $this->join("kelas", "kelas.id_kelas = komposisi_kelas.kelas_id_kelas", "left");
+        $this->where("(siswa.kelas IS NULL OR YEAR(komposisi_kelas.tanggal) = YEAR(CURRENT_DATE)-1)");
+        $this->where("siswa.status_id_status", "A");
+        $this->where("siswa.jurusan_id_jurusan", $IdJurusan);
+        $this->orderBy("kelas.id_kelas");
+        $this->orderBy("nama");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
+    function KomposisiKelas($IdKelas)
+    {
+        $this->select("komposisi_kelas.kode_unik, nis, nama, kelas.nama_kelas AS kelas");
+        $this->join("komposisi_kelas", "komposisi_kelas.siswa_nis = siswa.nis");
+        $this->join("kelas", "kelas.id_kelas = komposisi_kelas.kelas_id_kelas");
+        $this->where("kelas.id_kelas", $IdKelas);
+        $this->orderBy("nama");
+
+        $query = $this->get();
+        return $query->getResult();
     }
 }

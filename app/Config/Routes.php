@@ -55,5 +55,15 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->post("/profil-guru/tambah-dokumen", "ProfilGuru::TambahDokumen");
     $routes->get("/profil-guru/info-dokumen", "ProfilSaya::InfoDokumen");
 
+    $routes->get("/kelas", "Kelas::index");
+    $routes->get("/kelas/daftar-kelas", "Kelas::DaftarKelas");
+    $routes->get("/kelas/daftar-siswa-calon-kelas", "Kelas::DaftarSiswaCalonPenghuniKelas");
+    $routes->get("/kelas/komposisi-kelas", "Kelas::KomposisiKelas");
+    $routes->get("/kelas/info-pindah-kelas", "Kelas::InfoPerpindahan");
+    $routes->post("/kelas/tambah-kelas", "Kelas::TambahKelas");
+    $routes->get("/kelas/hapus-siswa", "Kelas::HapusSiswaDariKelas");
+    $routes->get("/kelas/pindah-kelas", "Kelas::PindahKelas");
+    $routes->post("/kelas/beri-kelas", "Kelas::BeriKelas");
+
     $routes->get("/tahun-akademik", "TahunAkademik::index");
 });
