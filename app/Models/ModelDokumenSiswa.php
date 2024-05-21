@@ -21,7 +21,7 @@ class ModelDokumenSiswa extends Model
 
     function InfoPrestasi($id_dokumen)
     {
-        $this->select("tanggal, nama_dokumen as prestasi, deskripsi");
+        $this->select("tanggal, nama_dokumen as prestasi, deskripsi, file");
         $this->where("id_dokumen_siswa", $id_dokumen);
 
         return $this->first();
