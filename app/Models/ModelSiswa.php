@@ -60,6 +60,19 @@ class ModelSiswa extends Model
         return $query->getResult();
     }
 
+    function DaftarSiswaMauLulus()
+    {
+        $this->select("siswa.nis, siswa.nama, kelas.nama_kelas as kelas, siswa.jenis_kelamin_id_jk as gender");
+        $this->join("kelas", "siswa.kelas = kelas.id_kelas");
+        $this->where("siswa.status_id_status", "A");
+        $this->where("kelas.tingkat", 3);
+        $this->orderBy("kelas.nama_kelas", "ASC");
+        $this->orderBy("siswa.nama", "ASC");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
     function DaftarSiswaDropOut()
     {
         $this->select("siswa.nis, siswa.nama, kelas.nama_kelas AS kelas, jenis_kelamin.jenis_kelamin AS gender, status.status AS keterangan");

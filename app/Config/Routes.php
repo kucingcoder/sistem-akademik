@@ -48,6 +48,21 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->post("/guru/berhenti", "Guru::GuruBerhenti");
     $routes->post("/guru/tambah", "Guru::TambahGuru");
 
+    $routes->get("/siswa", "Siswa::index");
+    $routes->get("/siswa-lulus", "Siswa::SiswaLulus");
+    $routes->post("/siswa-lulus/luluskan", "Siswa::Luluskan");
+    $routes->post("/siswa/do", "Siswa::DOSiswa");
+    $routes->get("/siswa-dropout", "Siswa::SiswaDO");
+    $routes->get("/siswa/do", "Siswa::InfoSiswaDO");
+    $routes->post("/siswa/do", "Siswa::DOSiswa");
+    $routes->get("/profil-siswa", "ProfilSiswa::index");
+    $routes->post("/profil-siswa/ubah-profil", "ProfilSiswa::UbahProfil");
+    $routes->post("/profil-siswa/ubah-username-password", "ProfilSiswa::UbahUsernamePassword");
+    $routes->get("/profil-siswa/info-prestasi", "ProfilSiswa::InfoPrestasi");
+    $routes->post("/profil-siswa/tambah-prestasi", "ProfilSiswa::TambahPrestasi");
+    $routes->get("/profil-lulusan", "ProfilSiswa::MantanSiswa/lulus");
+    $routes->get("/profil-siswa-drop-out", "ProfilSiswa::MantanSiswa/do");
+
     $routes->get("/profil-guru", "ProfilGuru::index");
     $routes->post("/profil-guru/ubah-profil", "ProfilGuru::UbahProfil");
     $routes->get("/profil-guru/deskripsi-kelas", "ProfilGuru::DeskripsiKelas");
@@ -64,6 +79,8 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->get("/kelas/hapus-siswa", "Kelas::HapusSiswaDariKelas");
     $routes->get("/kelas/pindah-kelas", "Kelas::PindahKelas");
     $routes->post("/kelas/beri-kelas", "Kelas::BeriKelas");
+
+    $routes->get("/jadwal-pelajaran", "JadwalPelajaran::index");
 
     $routes->get("/tahun-akademik", "TahunAkademik::index");
 });
