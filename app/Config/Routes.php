@@ -48,5 +48,12 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->post("/guru/berhenti", "Guru::GuruBerhenti");
     $routes->post("/guru/tambah", "Guru::TambahGuru");
 
+    $routes->get("/profil-guru", "ProfilGuru::index");
+    $routes->post("/profil-guru/ubah-profil", "ProfilGuru::UbahProfil");
+    $routes->get("/profil-guru/deskripsi-kelas", "ProfilGuru::DeskripsiKelas");
+    $routes->post("/profil-guru/ubah-username-password", "ProfilGuru::UbahUsernamePassword");
+    $routes->post("/profil-guru/tambah-dokumen", "ProfilGuru::TambahDokumen");
+    $routes->get("/profil-guru/info-dokumen", "ProfilSaya::InfoDokumen");
+
     $routes->get("/tahun-akademik", "TahunAkademik::index");
 });
