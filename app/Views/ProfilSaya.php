@@ -467,8 +467,6 @@
         formData.append("LulusanTahun", LulusanTahun);
         formData.append("AsalPerguruanTinggi", AsalPerguruanTinggi);
         formData.append("Jabatan", Jabatan);
-
-
         formData.append("Foto", Foto);
 
         fetch("/profil/ubah-profil", {
