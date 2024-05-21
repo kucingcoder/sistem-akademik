@@ -34,14 +34,21 @@
                         <h5 class="card-title badge border-primary border-1 text-primary">Total <?php echo count($SiswaAktif); ?> Siswa <span>| Aktif</span></h5>
 
                         <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="left" title="Tambah siswa satu persatu">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Tambah siswa satu persatu">
                                 <a class="nav-link collapsed" role="button" data-bs-toggle="modal" data-bs-target="#verticalycentered1">
                                     <i class="bi bi-person-plus"></i>
                                 </a>
                             </div>
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="right" title="Tambah siswa masal">
-                                <a class="nav-link collapsed" href="sistem-pendaftaran">
+
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Tambah siswa masal">
+                                <a class="nav-link collapsed" role="button" data-bs-toggle="modal" data-bs-target="#upload">
                                     <i class="bi bi-file-plus"></i>
+                                </a>
+                            </div>
+
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Unduh Template Excel">
+                                <a class="nav-link collapsed" href="/dokumen/tabel.xlsx" download>
+                                    <i class="bi bi-download"></i>
                                 </a>
                             </div>
                         </div>
@@ -338,11 +345,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="KonfirmasiTambahkan" class="modal-body">
-                Apakah Yakin Data Siswa Baru dengan Nama Brandon Jacob sudah Benar dan akan Ditambahkan?
+                Apakah Yakin Data Siswa Baru sudah Benar dan akan Ditambahkan?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#verticalycentered1">BATAL</button>
-                <button type="submit" class="btn btn-primary"><a href="siswa">IYA</a></button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="TambahSiswa()">IYA</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upload" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambahkan siswa masal lewat file</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="file" id="siswa-masal">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="UploadExcel()">Upload</button>
             </div>
         </div>
     </div>
@@ -635,6 +662,7 @@
         event.preventDefault();
 
         var alasan = document.getElementsByName("Alasan");
+        var File = document.getElementById("DO-Dokumen").files[0];
         var status = "";
 
         for (var i = 0; i < alasan.length; i++) {
@@ -647,8 +675,94 @@
         var formData = new FormData();
         formData.append("NIS", NisDO);
         formData.append("Status", status);
+        formData.append("Dokumen", File);
 
         fetch("/siswa/do", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function TambahSiswa() {
+        var Nis = document.getElementById("floatingNIS").value;
+        var Nisn = document.getElementById("floatingNISN").value;
+        var Nama = document.getElementById("floatingNama").value;
+        var Gender = document.getElementById("floatingSelect").value;
+        var TempatLahir = document.getElementById("floatingTmpLhr").value;
+        var TanggalLahir = document.getElementById("floatingTglLhr").value;
+        var Agama = document.getElementById("FloatingAgama").value;
+        var NoTelp = document.getElementById("floatingNotelp").value;
+        var Email = document.getElementById("floatingEmail").value;
+        var Alamat = document.getElementById("floatingTextarea").value;
+        var Sekolah = document.getElementById("floatingAsalSKl").value;
+        var Nilai = document.getElementById("floatingUjian").value;
+        var TahunLulus = document.getElementById("floatingThnLls").value;
+        var Ayah = document.getElementById("floatingAyah").value;
+        var NoAyah = document.getElementById("floatingTelpAyah").value;
+        var KerjaAyah = document.getElementById("floatingKrjAyah").value;
+        var Ibu = document.getElementById("floatingIbu").value;
+        var NoIbu = document.getElementById("floatingTelpIbu").value;
+        var KerjaIbu = document.getElementById("floatingKrjIbu").value;
+        var Jurusan = document.getElementById("floatingJurusan").value;
+        var Foto = document.getElementById("formFile").files[0];
+
+        var formData = new FormData();
+        formData.append("Nis", Nis);
+        formData.append("Nisn", Nisn);
+        formData.append("NamaLengkap", Nama);
+        formData.append("Gender", Gender);
+        formData.append("TempatLahir", TempatLahir);
+        formData.append("TanggalLahir", TanggalLahir);
+        formData.append("Agama", Agama);
+        formData.append("NoTelp", NoTelp);
+        formData.append("Email", Email);
+        formData.append("Alamat", Alamat);
+        formData.append("AsalSekolah", Sekolah);
+        formData.append("NilaiUjian", Nilai);
+        formData.append("TahunLulus", TahunLulus);
+        formData.append("NamaAyah", Ayah);
+        formData.append("NoTelpAyah", NoAyah);
+        formData.append("KerjaAyah", KerjaAyah);
+        formData.append("NamaIbu", Ibu);
+        formData.append("NoTelpIbu", NoIbu);
+        formData.append("KerjaIbu", KerjaIbu);
+        formData.append("Jurusan", Jurusan);
+        formData.append("Foto", Foto);
+
+        fetch("/siswa/tambah", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function UploadExcel() {
+        var File = document.getElementById("siswa-masal").files[0];
+        var formData = new FormData();
+        formData.append("File", File);
+
+        fetch("/siswa/tambah-masal", {
                 method: "POST",
                 body: formData,
                 headers: {

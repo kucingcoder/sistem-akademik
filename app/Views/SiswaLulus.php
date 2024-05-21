@@ -45,11 +45,11 @@
                         <table class="table table-striped w-100" id="daftar-lulus">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Kelas</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Tahun Lulus</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Kelas</th>
+                                    <th class="text-center">Gender</th>
+                                    <th class="text-center">Tahun Lulus</th>
                                 </tr>
                             </thead>
 
@@ -58,12 +58,12 @@
                                     <?php $index = 1; ?>
                                     <?php foreach ($SiswaLulus as $Anak) : ?>
                                         <tr>
-                                            <th scope="row"><?php echo $index; ?></th>
+                                            <th class="text-center"><?php echo $index; ?></th>
                                             <?php $index++; ?>
                                             <td><a class="row" href="/profil-lulusan?nis=<?php echo $Anak->nis; ?>"><?php echo $Anak->nama; ?></a></td>
                                             <td><?php echo str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $Anak->kelas); ?></td>
-                                            <td><?php echo $Anak->gender; ?></td>
-                                            <td><?php echo $Anak->tahun_lulus; ?></td>
+                                            <td class="text-center"><?php echo $Anak->gender; ?></td>
+                                            <td class="text-center"><?php echo $Anak->tahun_lulus; ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -148,11 +148,11 @@
                     <table class="table table-striped w-100" id="calon-lulus">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Lulus</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Gender</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Lulus</th>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Kelas</th>
+                                <th class="text-center">Gender</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,17 +160,13 @@
                                 <?php $index = 1; ?>
                                 <?php foreach ($SiswaMauLulus as $Anak) : ?>
                                     <tr>
-                                        <th scope="row"><?php echo $index; ?></th>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck1" checked onclick="Dikecualikan('<?php echo $Anak->nis; ?>', this)">
-                                                <label class="form-check-label" for="gridCheck1">
-                                                </label>
-                                            </div>
+                                        <th class="text-center"><?php echo $index; ?></th>
+                                        <td class="text-center">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck1" checked onclick="Dikecualikan('<?php echo $Anak->nis; ?>', this)">
                                         </td>
                                         <td><?php echo $Anak->nama; ?></td>
-                                        <td><?php echo str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $Anak->kelas); ?></td>
-                                        <td><?php echo str_replace(["L", "P"], ["Laki-Laki", "Perempuan"], $Anak->gender); ?></td>
+                                        <td class="text-center"><?php echo str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $Anak->kelas); ?></td>
+                                        <td class="text-center"><?php echo str_replace(["L", "P"], ["Laki-Laki", "Perempuan"], $Anak->gender); ?></td>
                                     </tr>
                                     <?php $index++; ?>
                                 <?php endforeach; ?>

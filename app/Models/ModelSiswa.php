@@ -8,7 +8,7 @@ class ModelSiswa extends Model
 {
     protected $table = "siswa";
     protected $primaryKey = "nis";
-    protected $allowedFields = ["nis", "nisn", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "tempat_lahir", "tanggal_lahir", "alamat_domisili", "no_hp", "email", "nama_ayah", "nama_ibu", "hp_ayah", "hp_ibu", "kerja_ayah", "Kerja_ibu", "sekolah_asal", "nilai_smp", "tahun_lulus", "foto", "status_id_status", "username", "password"];
+    protected $allowedFields = ["nis", "nisn", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "tempat_lahir", "tanggal_lahir", "alamat_domisili", "no_hp", "email", "nama_ayah", "nama_ibu", "hp_ayah", "hp_ibu", "kerja_ayah", "Kerja_ibu", "sekolah_asal", "nilai_smp", "tahun_lulus", "lulus_tahun", "foto", "status_id_status", "username", "password", "jurusan_id_jurusan"];
 
     function DaftarSiswaDiKelas($Kelas)
     {
@@ -46,6 +46,38 @@ class ModelSiswa extends Model
 
         $query = $this->get();
         return $query->getResult();
+    }
+
+    function TambahSiswa($Nis, $Nisn, $NamaLengkap, $Gender, $Agama, $TempatLahir, $TanggalLahir, $NoTelp, $Email, $Alamat, $AsalSekolah, $NilaiUjian, $TahunLulus, $NamaAyah, $NamaIbu, $NoTelpAyah, $NoTelpIbu, $KerjaAyah, $KerjaIbu, $Foto, $Jurusan)
+    {
+        $data = [
+            'nis' => $Nis,
+            'nisn' => $Nisn,
+            'nama' => $NamaLengkap,
+            'jenis_kelamin_id_jk' => $Gender,
+            'agama_id_agama' => $Agama,
+            'tempat_lahir' => $TempatLahir,
+            'tanggal_lahir' => $TanggalLahir,
+            'no_hp' => $NoTelp,
+            'email' => $Email,
+            'alamat_domisili' => $Alamat,
+            'sekolah_asal' => $AsalSekolah,
+            'nilai_smp' => $NilaiUjian,
+            'tahun_lulus' => $TahunLulus,
+            'nama_ayah' => $NamaAyah,
+            'nama_ibu' => $NamaIbu,
+            'hp_ayah' => $NoTelpAyah,
+            'hp_ibu' => $NoTelpIbu,
+            'kerja_ayah' => $KerjaAyah,
+            'kerja_ibu' => $KerjaIbu,
+            'jurusan_id_jurusan' => $Jurusan,
+            'username' => $Email,
+            'status_id_status' => 'A',
+            'password' => '123',
+            'foto' => $Foto
+        ];
+
+        return $this->insert($data);
     }
 
     function DaftarSiswaLulus()

@@ -8,7 +8,7 @@ class ModelDokumenSiswa extends Model
 {
     protected $table = "dokumen_siswa";
     protected $primaryKey = "id_dokumen_siswa";
-    protected $allowedFields = ["nama_dokumen", "deskripsi", "file", "siswa_nis"];
+    protected $allowedFields = ["nama_dokumen", "deskripsi", "file", "siswa_nis", "kategori"];
 
     function DaftarPrestasi($NIS)
     {
@@ -46,5 +46,18 @@ class ModelDokumenSiswa extends Model
         ];
 
         return $this->update($id_Dokumen, $data);
+    }
+
+    function TambahDokumen($nis, $NamaDokumen, $Deskripsi, $NamaFile)
+    {
+        $data = [
+            "nama_dokumen" => $NamaDokumen,
+            "deskripsi"    => $Deskripsi,
+            "file"         => $NamaFile,
+            "siswa_nis"    => $nis,
+            "kategori"     => "dokumen"
+        ];
+
+        return $this->insert($data);
     }
 }
