@@ -43,5 +43,10 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
 });
 
 $routes->group('', ['filter' => 'admin'], function ($routes) {
+    $routes->get("/guru", "Guru::index");
+    $routes->get("/guru/berhenti", "Guru::InfoGuruBerhenti");
+    $routes->post("/guru/berhenti", "Guru::GuruBerhenti");
+    $routes->post("/guru/tambah", "Guru::TambahGuru");
+
     $routes->get("/tahun-akademik", "TahunAkademik::index");
 });

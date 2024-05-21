@@ -8,7 +8,7 @@ class ModelGuru extends Model
 {
     protected $table = "guru";
     protected $primaryKey = "nip";
-    protected $allowedFields = ["nik", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status", "jenis"];
+    protected $allowedFields = ["nip", "nik", "nama", "jenis_kelamin_id_jk", "agama_id_agama", "status_kawin_id_status", "tempat_lahir", "tanggal_lahir", "no_hp", "email", "alamat_domisili", "kompetensi", "lulusan_tahun", "lulusan", "jabatan", "foto", "username", "password", "status_id_status", "inisial", "jenis"];
 
     public function Masuk($username, $password)
     {
@@ -138,5 +138,37 @@ class ModelGuru extends Model
         ];
 
         return $this->update($nip, $data);
+    }
+
+    function TambahGuru($Nip, $Nik, $Nama, $Gender, $Agama, $StatusPerkawinan, $TempatLahir, $TanggalLahir, $NoTelp, $Email, $Alamat, $Kompetensi, $LulusanTahun, $AsalPerguruanTinggi, $Jabatan, $Foto)
+    {
+        $string_acak = str_shuffle(str_replace(' ', '', $Nama));
+        $inisial = strtoupper(substr($string_acak, 0, 2));
+
+        $data = [
+            'nip' => $Nip,
+            'nik' => $Nik,
+            'nama' => $Nama,
+            'jenis_kelamin_id_jk' => $Gender,
+            'agama_id_agama' => $Agama,
+            'status_kawin_id_status' => $StatusPerkawinan,
+            'tempat_lahir' => $TempatLahir,
+            'tanggal_lahir' => $TanggalLahir,
+            'no_hp' => $NoTelp,
+            'email' => $Email,
+            'alamat_domisili' => $Alamat,
+            'kompetensi' => $Kompetensi,
+            'lulusan' => $AsalPerguruanTinggi,
+            'lulusan_tahun' => $LulusanTahun,
+            'jabatan' => $Jabatan,
+            'foto' => $Foto,
+            'inisial' => $inisial,
+            'status_id_status' => 'A',
+            'username' => $Email,
+            'password' => md5('123'),
+            'jenis' => 'staff'
+        ];
+
+        return $this->insert($data);
     }
 }
