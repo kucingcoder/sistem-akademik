@@ -141,6 +141,26 @@ class ProfilGuru extends BaseController
         return json_encode($Hasil);
     }
 
+    function AngkatAdmin()
+    {
+        $Nip = $this->request->getGet("nip");
+        $Guru = new ModelGuru();
+
+        $Guru->AngkatAdmin($Nip);
+
+        return redirect()->to("/profil-guru?nip=" . $Nip);
+    }
+
+    function CabutAdmin()
+    {
+        $Nip = $this->request->getGet("nip");
+        $Guru = new ModelGuru();
+
+        $Guru->CabutAdmin($Nip);
+
+        return redirect()->to("/profil-guru?nip=" . $Nip);
+    }
+
     function TambahDokumen()
     {
         $Dokumen = new ModelDokumenGuru();
@@ -149,14 +169,16 @@ class ProfilGuru extends BaseController
         $DeskripsiDokumen = $this->request->getPost("DeskripsiDokumen");
         $FileDokumen      = $this->request->getFile("FileDokumen");
 
+        $Nip = $this->request->getGet("nip");
+
         if ($NamaDokumen != "" && $DeskripsiDokumen != "" && $FileDokumen != null && $FileDokumen->isValid()) {
             $NamaFile = $FileDokumen->getRandomName();
-            if ($Dokumen->TambahDokumen($this->request->getGet("nip"), $NamaDokumen, $DeskripsiDokumen, $NamaFile)) {
+            if ($Dokumen->TambahDokumen($Nip, $NamaDokumen, $DeskripsiDokumen, $NamaFile)) {
                 $FileDokumen->move(ROOTPATH . "public/dokumen", $NamaFile);
             }
         }
 
-        return redirect()->to("/profil-guru");
+        return redirect()->to("/profil-guru?nip=" . $Nip);
     }
 
     function InfoDokumen()

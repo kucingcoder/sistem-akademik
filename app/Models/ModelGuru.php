@@ -140,6 +140,19 @@ class ModelGuru extends Model
         return $this->update($nip, $data);
     }
 
+    function AngkatAdmin($Nip)
+    {
+        $data = ["jenis" => "staff admin"];
+        return $this->update($Nip, $data);
+    }
+
+    function CabutAdmin($Nip)
+    {
+        $data = ["jenis" => "staff"];
+        return $this->update($Nip, $data);
+    }
+
+
     function TambahGuru($Nip, $Nik, $Nama, $Gender, $Agama, $StatusPerkawinan, $TempatLahir, $TanggalLahir, $NoTelp, $Email, $Alamat, $Kompetensi, $LulusanTahun, $AsalPerguruanTinggi, $Jabatan, $Foto)
     {
         $string_acak = str_shuffle(str_replace(' ', '', $Nama));

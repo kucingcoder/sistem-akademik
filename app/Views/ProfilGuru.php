@@ -317,7 +317,6 @@
             </div>
 
             <div class="card">
-
                 <div class="card-body">
                     <h5 class="card-title">Ubah Username dan Password <span>| <?php echo $Nama; ?></span></h5>
 
@@ -385,6 +384,55 @@
                                     <button type="submit" class="btn btn-primary" onclick="UbahUsernamePassword()"><a>IYA</a></button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $Nama; ?></h5>
+
+                    <form class="row g-3">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#angkatadmin">Jadikan Admin</button>
+                            <button type="reset" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cabutadmin">Cabut Status Admin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="angkatadmin" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Konfirmasi Menambahkan Admin Baru</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah yakin akan Menjadikan Guru Ini Sebagai Admin?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                            <button type="submit" class="btn btn-primary" onclick="AngkatAdmin()"><a>IYA</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="cabutadmin" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Konfirmasi Menghapus Status Admin</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah yakin akan Mencabut Status Guru Ini Sebagai Admin?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                            <button type="submit" class="btn btn-primary" onclick="CabutAdmin()"><a>IYA</a></button>
                         </div>
                     </div>
                 </div>
@@ -597,6 +645,30 @@
         setTimeout(function() {
             document.getElementById("InfoUbahUsernamePassword").className = "d-none";
         }, 5000);
+    }
+
+    function AngkatAdmin() {
+        fetch("/profil-guru/setadmin?nip=<?php echo $Profil["nip"]; ?>")
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function CabutAdmin() {
+        fetch("/profil-guru/removeadmin?nip=<?php echo $Profil["nip"]; ?>")
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
     function TambahDokumen(event) {

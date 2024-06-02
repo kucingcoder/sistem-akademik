@@ -69,6 +69,8 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->post("/profil-guru/ubah-profil", "ProfilGuru::UbahProfil");
     $routes->get("/profil-guru/deskripsi-kelas", "ProfilGuru::DeskripsiKelas");
     $routes->post("/profil-guru/ubah-username-password", "ProfilGuru::UbahUsernamePassword");
+    $routes->get("/profil-guru/setadmin", "ProfilGuru::AngkatAdmin");
+    $routes->get("/profil-guru/removeadmin", "ProfilGuru::CabutAdmin");
     $routes->post("/profil-guru/tambah-dokumen", "ProfilGuru::TambahDokumen");
     $routes->get("/profil-guru/info-dokumen", "ProfilSaya::InfoDokumen");
 
