@@ -85,6 +85,9 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->post("/kelas/beri-kelas", "Kelas::BeriKelas");
 
     $routes->get("/mata-pelajaran", "MataPelajaran::index");
+    $routes->get("/mata-pelajaran/mapel", "MataPelajaran::DaftarMapel");
+    $routes->get("/mata-pelajaran/detail", "MataPelajaran::DetailMapel");
+    $routes->get("/mata-pelajaran/pengampu", "MataPelajaran::GuruPengampu");
 
     $routes->get("/jadwal-pelajaran", "JadwalPelajaran::index");
 

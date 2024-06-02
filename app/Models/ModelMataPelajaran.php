@@ -57,4 +57,47 @@ class ModelMataPelajaran extends Model
         $query = $this->get();
         return $query->getResult();
     }
+
+    function DaftarMapel()
+    {
+        $this->select("DISTINCT(mata_pelajaran.id_mapel) AS kode, nama_mapel AS mata_pelajaran, kategori.status AS kategori");
+        $this->join("kategori", "kategori.id_kategori = mata_pelajaran.kategori_id_kategori");
+        $this->join("ampu_mapel", "ampu_mapel.mata_pelajaran_id_mapel = mata_pelajaran.id_mapel");
+        $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
+        $this->join("semester", "semester.id_semester = ampu_mapel.semester_id_semester");
+        $this->where("mata_pelajaran.status", 1);
+        $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
+        $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
+        $this->where("semester.id_semester", date("n") >= 7 ? 1 : 1);
+        $this->orderBy("mata_pelajaran.nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
+    function DaftarMapelSpesifik($IdTahunAkademik, $IdSemester)
+    {
+        $this->select("DISTINCT(mata_pelajaran.id_mapel) AS kode, nama_mapel AS mata_pelajaran, kategori.status AS kategori");
+        $this->join("kategori", "kategori.id_kategori = mata_pelajaran.kategori_id_kategori");
+        $this->join("ampu_mapel", "ampu_mapel.mata_pelajaran_id_mapel = mata_pelajaran.id_mapel");
+        $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
+        $this->join("semester", "semester.id_semester = ampu_mapel.semester_id_semester");
+        $this->where("mata_pelajaran.status", 1);
+        $this->where("tahun_akademik.id_ta", $IdTahunAkademik);
+        $this->where("semester.id_semester", $IdSemester);
+        $this->orderBy("mata_pelajaran.nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
+    function InfoMapel($Id)
+    {
+        $this->select("mata_pelajaran.nama_mapel, kategori.status AS kategori, mata_pelajaran.deskripsi");
+        $this->join("kategori", "mata_pelajaran.kategori_id_kategori = kategori.id_kategori");
+        $this->where("mata_pelajaran.status", 1);
+        $this->where("id_mapel", $Id);
+
+        return $this->first();
+    }
 }

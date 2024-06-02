@@ -50,4 +50,20 @@ class ModelAmpuMapel extends Model
         $query = $this->get();
         return $query->getResult();
     }
+
+    function GuruPengampu($Id)
+    {
+        $this->select('guru.nip, guru.nama, kelas.nama_kelas AS kelas, jumlah_jam');
+        $this->join('guru', 'guru.inisial = ampu_mapel.guru_inisial');
+        $this->join('mata_pelajaran', 'mata_pelajaran.id_mapel = ampu_mapel.mata_pelajaran_id_mapel');
+        $this->join('tahun_akademik', 'tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta');
+        $this->join('kelas', 'kelas.id_kelas = ampu_mapel.kelas_id_kelas');
+        $this->where('tahun_akademik.mulai <=', date('Y-m-d'));
+        $this->where('tahun_akademik.sampai >=', date('Y-m-d'));
+        $this->where('semester_id_semester', (date('n') >= 7) ? 1 : 1);
+        $this->where('mata_pelajaran.id_mapel', $Id);
+
+        $query = $this->get();
+        return $query->getResult();
+    }
 }
