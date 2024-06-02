@@ -56,7 +56,7 @@ class Kelas extends BaseController
             "DaftarGuru"    => $DaftarGuru
         );
 
-        return view("kelas", $data);
+        return view("Kelas", $data);
     }
 
     function DaftarKelas()
