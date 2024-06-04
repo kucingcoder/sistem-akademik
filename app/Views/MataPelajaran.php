@@ -64,8 +64,8 @@
                                 <?php foreach ($DaftarMapel as $Mapel) : ?>
                                     <tr>
                                         <th class="text-center"><?= $index; ?></th>
-                                        <td class="text-center"><?php echo $Mapel->kode; ?></td>
-                                        <td><?php echo $Mapel->mata_pelajaran; ?></td>
+                                        <td class="text-center col-md-1"><?php echo $Mapel->kode; ?></td>
+                                        <td class="col-md-3"><?php echo $Mapel->mata_pelajaran; ?></td>
                                         <td class="text-center"><?php echo $Mapel->kategori; ?></td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered1" onclick="DetailMapel('<?php echo $Mapel->kode; ?>')">
@@ -248,8 +248,8 @@
                         baris += `
                             <tr>
                                 <th class="text-center">${index + 1}</th>
-                                <td class="text-center">${item.kode}</td>
-                                <td>${item.mata_pelajaran}</td>
+                                <td class="text-center col-md-1">${item.kode}</td>
+                                <td class="col-md-3">${item.mata_pelajaran}</td>
                                 <td class="text-center">${item.kategori}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered1" onclick="DetailMapel('${item.kode}')">

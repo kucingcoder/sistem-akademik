@@ -50,4 +50,13 @@ class ModelTahunAkademik extends Model
 
         return $this->db->affectedRows();
     }
+
+    function IdTaSekarang()
+    {
+        $this->select("id_ta");
+        $this->where("mulai <=", "CURDATE()", FALSE);
+        $this->where("sampai >=", "CURDATE()", FALSE);
+
+        return $this->first();
+    }
 }

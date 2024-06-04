@@ -8,7 +8,7 @@
     <h1>Kelas</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Dashboard.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
             <li class="breadcrumb-item active">Kelas</li>
         </ol>
     </nav>

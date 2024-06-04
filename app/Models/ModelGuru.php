@@ -187,7 +187,7 @@ class ModelGuru extends Model
 
     function DaftarGuru()
     {
-        $this->select("nip, nama");
+        $this->select("nip, nama, inisial");
         $this->where("inisial IS NOT NULL");
         $this->orderBy("nama", "ASC");
 

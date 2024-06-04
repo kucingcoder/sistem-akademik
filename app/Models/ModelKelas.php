@@ -64,6 +64,17 @@ class ModelKelas extends Model
         return $query->getResult();
     }
 
+    function KelasTersediaTanpaJurusan()
+    {
+        $this->select("id_kelas, nama_kelas AS kelas");
+        $this->join("tahun_akademik", "tahun_akademik.id_ta = kelas.tahun_akademik_id_ta");
+        $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
+        $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
     function KelasTersedia($Nis)
     {
         $this->select("kelas.id_kelas, nama_kelas");

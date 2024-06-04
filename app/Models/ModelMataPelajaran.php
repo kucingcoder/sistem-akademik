@@ -58,6 +58,16 @@ class ModelMataPelajaran extends Model
         return $query->getResult();
     }
 
+    function DaftarMapelSimpel()
+    {
+        $this->select("id_mapel, nama_mapel AS mata_pelajaran");
+        $this->where("status", 1);
+        $this->orderBy("nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
     function DaftarMapel()
     {
         $this->select("DISTINCT(mata_pelajaran.id_mapel) AS kode, nama_mapel AS mata_pelajaran, kategori.status AS kategori");
