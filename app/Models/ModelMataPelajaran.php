@@ -7,6 +7,8 @@ use CodeIgniter\Model;
 class ModelMataPelajaran extends Model
 {
     protected $table = "mata_pelajaran";
+    protected $primaryKey = "id_mapel";
+    protected $allowedFields = ["status"];
 
     function DataJenis($jenis)
     {
@@ -85,6 +87,17 @@ class ModelMataPelajaran extends Model
         return $query->getResult();
     }
 
+    function DaftarMapelAktif()
+    {
+        $this->select("DISTINCT(mata_pelajaran.id_mapel) AS kode, nama_mapel AS mata_pelajaran, kategori.status AS kategori");
+        $this->join("kategori", "kategori.id_kategori = mata_pelajaran.kategori_id_kategori");
+        $this->where("mata_pelajaran.status", 1);
+        $this->orderBy("mata_pelajaran.nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
     function DaftarMapelSpesifik($IdTahunAkademik, $IdSemester)
     {
         $this->select("DISTINCT(mata_pelajaran.id_mapel) AS kode, nama_mapel AS mata_pelajaran, kategori.status AS kategori");
@@ -99,6 +112,25 @@ class ModelMataPelajaran extends Model
 
         $query = $this->get();
         return $query->getResult();
+    }
+
+    function DaftarMapelTidakAktif()
+    {
+        $this->select("id_mapel AS kode, nama_mapel AS mata_pelajaran");
+        $this->where("status", 0);
+        $this->orderBy("nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
+    function NonAktifkanMapel($Id)
+    {
+        $data = [
+            "status" => 0
+        ];
+
+        return $this->update($Id, $data);
     }
 
     function InfoMapel($Id)

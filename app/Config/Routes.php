@@ -91,6 +91,9 @@ $routes->group('', ['filter' => 'admin'], function ($routes) {
     $routes->get("/ampu-mapel", "AmpuMapel::index");
     $routes->get("/ampu-mapel/tambah", "AmpuMapel::TambahAmpu");
     $routes->get("/ampu-mapel/hapus", "AmpuMapel::HapusAmpu");
+    $routes->get("/tetapkan-mapel", "TetapkanMapel::index");
+    $routes->post("/tetapkan-mapel/aktif", "TetapkanMapel::AktifkanMapel");
+    $routes->get("/tetapkan-mapel/nonaktif", "TetapkanMapel::NonAktifkanMapel");
 
     $routes->get("/jadwal-pelajaran", "JadwalPelajaran::index");
 
