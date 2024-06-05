@@ -103,4 +103,40 @@ class ModelAmpuMapel extends Model
         $this->where("id_ampu", $IdMapel);
         return $this->delete();
     }
+
+    function JadwalKelasHari($NamaKelas, $Hari)
+    {
+        $this->select("id_ampu, CONCAT(kode_ampu,'--', guru.nama,'--', mata_pelajaran.nama_mapel,'--', jumlah_jam, ' jam') kode, kelas.nama_kelas, jadwal.hari");
+        $this->join("mata_pelajaran", "mata_pelajaran.id_mapel = ampu_mapel.mata_pelajaran_id_mapel");
+        $this->join("guru", "guru.inisial = ampu_mapel.guru_inisial");
+        $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
+        $this->join("kelas", "kelas.id_kelas = ampu_mapel.kelas_id_kelas");
+        $this->join("jadwal", "jadwal.ampu_mapel_id_ampu = ampu_mapel.id_ampu");
+        $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
+        $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("kelas.nama_kelas", $NamaKelas);
+        $this->where("jadwal.hari", $Hari);
+        $this->orderBy("jadwal.jam_ke");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
+
+    function DaftarKodeMapel($NamaKelas)
+    {
+        $this->select("id_ampu, CONCAT(kode_ampu,'--', guru.nama,'--', mata_pelajaran.nama_mapel,'--', jumlah_jam, ' jam') kode");
+        $this->join("mata_pelajaran", "mata_pelajaran.id_mapel = ampu_mapel.mata_pelajaran_id_mapel");
+        $this->join("guru", "guru.inisial = ampu_mapel.guru_inisial");
+        $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
+        $this->join("kelas", "kelas.id_kelas = ampu_mapel.kelas_id_kelas");
+        $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
+        $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("kelas.nama_kelas", $NamaKelas);
+        $this->orderBy("mata_pelajaran.nama_mapel");
+
+        $query = $this->get();
+        return $query->getResult();
+    }
 }
