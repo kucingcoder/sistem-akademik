@@ -80,7 +80,7 @@ class ModelMataPelajaran extends Model
         $this->where("mata_pelajaran.status", 1);
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester.id_semester", date("n") >= 7 ? 1 : 1);
+        $this->where("semester.id_semester", date("n") >= 7 ? 1 : 2);
         $this->orderBy("mata_pelajaran.nama_mapel");
 
         $query = $this->get();

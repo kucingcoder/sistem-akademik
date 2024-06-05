@@ -21,7 +21,7 @@ class ModelJadwal extends Model
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
         $this->where("hari.id_hari", "WEEKDAY(CURRENT_DATE)", false);
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("guru.nip", $nip);
         $this->groupBy("mata_pelajaran.nama_mapel, kelas.nama_kelas");
 
@@ -52,7 +52,7 @@ class ModelJadwal extends Model
         $this->join("semester", "semester.id_semester = ampu_mapel.semester_id_semester");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("kelas.nama_kelas", $NamaKelas);
         $this->orderBy("kelas.id_kelas");
         $this->orderBy("jadwal.hari");
@@ -72,7 +72,7 @@ class ModelJadwal extends Model
         $this->join("kelas", "ampu_mapel.kelas_id_kelas = kelas.id_kelas");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("kelas.nama_kelas", $Kelas);
         $this->where("hari.id_hari", $IdHari);
         $this->where("jam_ke", $Jam);

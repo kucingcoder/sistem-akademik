@@ -18,7 +18,7 @@ class ModelAmpuMapel extends Model
         $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("guru_inisial", "(SELECT inisial FROM guru WHERE nip = $nip)", false);
         $this->groupby("mata_pelajaran.nama_mapel, kelas.nama_kelas, jumlah_jam");
 
@@ -61,7 +61,7 @@ class ModelAmpuMapel extends Model
         $this->join("kelas", "kelas.id_kelas = ampu_mapel.kelas_id_kelas");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", (date("n") >= 7) ? 1 : 1);
+        $this->where("semester_id_semester", (date("n") >= 7) ? 1 : 2);
         $this->where("mata_pelajaran.id_mapel", $Id);
 
         $query = $this->get();
@@ -77,7 +77,7 @@ class ModelAmpuMapel extends Model
         $this->join("tahun_akademik", "tahun_akademik.id_ta = ampu_mapel.tahun_akademik_id_ta");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", date("n") >= 7 ? 1 : 1);
+        $this->where("semester_id_semester", date("n") >= 7 ? 1 : 2);
         $this->orderBy("ampu_mapel.tanggal", "DESC");
 
         $query = $this->get();
@@ -92,7 +92,7 @@ class ModelAmpuMapel extends Model
             "tahun_akademik_id_ta" => $Ta,
             "kelas_id_kelas" => $IdKelas,
             "jumlah_jam" => $JumlahJam,
-            "semester_id_semester" => date("n") >= 7 ? 1 : 1
+            "semester_id_semester" => date("n") >= 7 ? 1 : 2
         ];
 
         return $this->insert($data);
@@ -114,7 +114,7 @@ class ModelAmpuMapel extends Model
         $this->join("jadwal", "jadwal.ampu_mapel_id_ampu = ampu_mapel.id_ampu");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("kelas.nama_kelas", $NamaKelas);
         $this->where("jadwal.hari", $Hari);
         $this->orderBy("jadwal.jam_ke");
@@ -132,7 +132,7 @@ class ModelAmpuMapel extends Model
         $this->join("kelas", "kelas.id_kelas = ampu_mapel.kelas_id_kelas");
         $this->where("tahun_akademik.mulai <=", date("Y-m-d"));
         $this->where("tahun_akademik.sampai >=", date("Y-m-d"));
-        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester_id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->where("kelas.nama_kelas", $NamaKelas);
         $this->orderBy("mata_pelajaran.nama_mapel");
 

@@ -19,7 +19,7 @@ class ModelKBM extends Model
         $this->where("guru.nip", $nip);
         $this->where("kelas.nama_kelas", $kelas);
         $this->where("mata_pelajaran.nama_mapel", $mapel);
-        $this->where("semester.id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) <= 6 THEN 1 ELSE 1 END)", false);
+        $this->where("semester.id_semester", "(SELECT CASE WHEN MONTH(CURRENT_DATE) >= 7 THEN 1 ELSE 2 END)", false);
         $this->orderBy("kbm.tanggal", "DESC");
 
         $query = $this->get();
