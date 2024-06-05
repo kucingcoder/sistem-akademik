@@ -94,7 +94,7 @@
                         <select class="form-select" aria-label="Default select example" id="pilih-kelas" onchange="LihatJadwal()">
                             <option value="null" selected disabled>Pilih Kelas</option>
                             <?php foreach ($DaftarKelas as $Kelas) : ?>
-                                <option value="<?= $Kelas->kelas ?>"><?= $Kelas->kelas ?></option>
+                                <option value="<?= $Kelas->kelas ?>"><?= str_replace(['1', '2', '3'], ['X', 'XI', 'XII'], $Kelas->kelas); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
