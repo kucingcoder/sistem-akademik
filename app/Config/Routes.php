@@ -42,24 +42,25 @@ $routes->group('', ['filter' => 'sesi'], function ($routes) {
     $routes->get("/profil/info-dokumen", "ProfilSaya::InfoDokumen");
 
     $routes->get("/siswa", "Siswa::index");
-    $routes->post("/siswa/tambah", "Siswa::TambahSiswa");
-    $routes->post("/siswa/tambah-masal", "Siswa::TambahSiswaMasal");
     $routes->get("/siswa-lulus", "Siswa::SiswaLulus");
-    $routes->post("/siswa-lulus/luluskan", "Siswa::Luluskan");
-    $routes->post("/siswa/do", "Siswa::DOSiswa");
     $routes->get("/siswa-dropout", "Siswa::SiswaDO");
     $routes->get("/siswa/do", "Siswa::InfoSiswaDO");
     $routes->post("/siswa/do", "Siswa::DOSiswa");
     $routes->get("/profil-siswa", "ProfilSiswa::index");
-    $routes->post("/profil-siswa/ubah-profil", "ProfilSiswa::UbahProfil");
-    $routes->post("/profil-siswa/ubah-username-password", "ProfilSiswa::UbahUsernamePassword");
     $routes->get("/profil-siswa/info-prestasi", "ProfilSiswa::InfoPrestasi");
-    $routes->post("/profil-siswa/tambah-prestasi", "ProfilSiswa::TambahPrestasi");
     $routes->get("/profil-lulusan", "ProfilSiswa::MantanSiswa/lulus");
     $routes->get("/profil-siswa-drop-out", "ProfilSiswa::MantanSiswa/do");
 });
 
 $routes->group('', ['filter' => 'admin'], function ($routes) {
+    $routes->post("/siswa/tambah", "Siswa::TambahSiswa");
+    $routes->post("/siswa/tambah-masal", "Siswa::TambahSiswaMasal");
+    $routes->post("/siswa-lulus/luluskan", "Siswa::Luluskan");
+    $routes->post("/siswa/do", "Siswa::DOSiswa");
+    $routes->post("/profil-siswa/ubah-profil", "ProfilSiswa::UbahProfil");
+    $routes->post("/profil-siswa/ubah-username-password", "ProfilSiswa::UbahUsernamePassword");
+    $routes->post("/profil-siswa/tambah-prestasi", "ProfilSiswa::TambahPrestasi");
+
     $routes->get("/guru", "Guru::index");
     $routes->get("/guru/berhenti", "Guru::InfoGuruBerhenti");
     $routes->post("/guru/berhenti", "Guru::GuruBerhenti");
